@@ -36,9 +36,10 @@ export const TableHeader = styled.div`
 `;
 
 export const TableTH = styled.div`
-  padding: 8px 18px;
+  padding: 12px 18px;
   box-sizing: border-box;
   text-align: center;
+  font-size: 22px;
 `;
 
 export const TableTR = styled.div`
