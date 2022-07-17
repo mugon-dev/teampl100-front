@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -12,23 +10,45 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## structure
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### axios singleton
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+utils/withAxios.ts
+동일한 옵션을 가진 axios 인스턴스 사용
+```
 
-## Learn More
+### Api error handling
 
-To learn more about Next.js, take a look at the following resources:
+```
+axios intercetpor에서 공공데이터 포털에서 정의된 error 코드에 따라 Error 메세지를 trow로 던짐
+Error boundary에서 감지하여 error fallback으로 전송
+공공데이터에서 정의된 에러가 아닐경우 메인페이지로 이동
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### suspense
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+suspense와 react-loading-skelton을 사용하여 로딩 ui 추가
+```
 
-## Deploy on Vercel
+### axios react-query
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+react query를 사용하여 axios 상태 관리
+react-query hydrate 이용하여 getserverside에서 pre-fetch (ssr)
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### boundary
+
+```
+error boundary, suspense를 묶어 asyncboundary로 범위 지정
+```
+
+### styled-components , local font
+
+```
+document에서 styled compoenents ssr 적용 및 local 폰트 불러옴
+styles/globalstyle.ts 에서 font 정의 및 css reset
+```
