@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { NEXT_PUBLIC_ENV } from '$config';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import GlobalStyle from '$styles/GlobalStyle';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = useRef(
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient.current}>
       <Hydrate state={pageProps.dehydratedState}>
+        <GlobalStyle />
         <Component {...pageProps} />
       </Hydrate>
       {NEXT_PUBLIC_ENV === 'local' ? <ReactQueryDevtools initialIsOpen={false} /> : null}
